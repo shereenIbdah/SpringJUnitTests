@@ -42,4 +42,12 @@ public class DepartmentService {
     public List<Employee> getManagers(){
         return departmentRepository.findManagers();
     }
+
+    public List<Department> getDepartmentsByManager(Long employeeId){
+        return departmentRepository.findDepartmentsByManager(employeeId);
+    }
+    //Get Total Number of Employees in Each Department:
+    public List<Object[]> getTotalEmployeesInEachDepartment(){
+        return departmentRepository.getTotalEmployeesInEachDepartment();
+    }
 }

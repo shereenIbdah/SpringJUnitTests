@@ -16,5 +16,9 @@ public interface EmployeeRepository  extends JpaRepository<Employee, Long> {
     //@Query(value = "SELECT e.* FROM employee e ,department_employee d   where d.department_id=?1 and  e.id=d.employee_id;",nativeQuery = true)
     List<String> findEmployeeNamesByDepartment(Long departmentId);
 
+    @Query("SELECT e FROM Employee  e WHERE e.age >= ?1 AND e.age <= ?2")
+    List<Employee> findEmployeeByAgeRange(int minAge, int maxAge);
+
+
 
 }

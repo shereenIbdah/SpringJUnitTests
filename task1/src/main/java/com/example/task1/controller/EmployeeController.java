@@ -60,5 +60,10 @@ public class EmployeeController {
     public List<String> getEmployeeNamesByDepartment(@RequestParam Long department){
         return employeeService.getEmployeeNamesByDepartment(department);
     }
+    //Get Employees by Age Range:
+    @GetMapping("/age")
+    public List<Employee> getEmployeesByAgeRange(@RequestParam int minAge, @RequestParam int maxAge){
+        return employeeService.getEmployeesByAgeRange(minAge,maxAge);
+    }
 
 }

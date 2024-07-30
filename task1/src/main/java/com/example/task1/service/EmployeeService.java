@@ -90,4 +90,10 @@ public class EmployeeService {
         List<String> employees = employeeRepository.findEmployeeNamesByDepartment(department);
         return employees;
     }
+
+    public List<Employee> getEmployeesByAgeRange(int minAge, int maxAge){
+        List<Employee> employees = employeeRepository.findEmployeeByAgeRange(minAge,maxAge);
+        return employees;
+    }
+
 }

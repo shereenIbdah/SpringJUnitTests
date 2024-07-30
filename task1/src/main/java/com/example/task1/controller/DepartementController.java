@@ -40,4 +40,14 @@ public class DepartementController {
     public List<Employee> getManagers(){
         return departementService.getManagers();
     }
+    //Departments Managed by a Specific Employee
+    @GetMapping("/{employeeId}")
+    public List<Department> getDepartmentsByManager(@PathVariable("employeeId") Long employeeId){
+        return departementService.getDepartmentsByManager(employeeId);
+    }
+    //Get Total Number of Employees in Each Department:
+    @GetMapping("/totalEmployees")
+    public List<Object[]> getTotalEmployeesInEachDepartment(){
+        return departementService.getTotalEmployeesInEachDepartment();
+    }
 }

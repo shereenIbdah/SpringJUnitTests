@@ -30,16 +30,16 @@ public class Employee {
     @JsonIgnore
     private List<Department> departments;
 
-    @OneToOne(mappedBy = "manager")
-    @JsonIgnore
-    private Department department;
+//    @OneToOne(mappedBy = "manager")
+//    @JsonIgnore
+//    private Department department;
 
 
     public Employee() {
     }
 
     public Employee(String name, Integer age, Integer phoneNumber, String gender, Double baseSalary,  LocalDate hireDate, String role, Address address
-    , List<Department> departments , Department department) {
+    , List<Department> departments ) {
         this.name = name;
         this.age = age;
         this.phoneNumber = phoneNumber;
@@ -49,7 +49,7 @@ public class Employee {
         this.role = role;
         this.address = address;
         this.departments = departments;
-        this.department = department;
+//        this.department = department;
     }
 
     public Long getId() {
