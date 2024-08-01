@@ -27,11 +27,12 @@ public class Department {
     public Department() {
     }
 
-    public Department(String name,  List<Employee> employees,Employee manager) {
+    public Department(String name, List<Employee> employees, Employee manager) {
         this.name = name;
         this.manager = manager;
         this.employees = employees;
     }
+
     public String getName() {
         return name;
     }

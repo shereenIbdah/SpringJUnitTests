@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "api/v1/departement")
 public class DepartementController {
-    private  final DepartmentService departementService;
+    private final DepartmentService departementService;
 
     @Autowired
     public DepartementController(DepartmentService departementService) {
@@ -22,32 +22,38 @@ public class DepartementController {
     public void addDepartement(@RequestBody Department departement) {
         departementService.addDepartement(departement);
     }
+
     @GetMapping("/allDepartement")
     public List<Department> getDepartements() {
         return departementService.getDepartements();
     }
+
     @DeleteMapping(path = "/deleteDepartement/{departementId}")
     public void deleteDepartement(@PathVariable("departementId") Long departementId) {
         departementService.deleteDepartement(departementId);
     }
+
     @PutMapping(path = "/updateDepartement/{departementId}")
     public void updateDepartement(@PathVariable("departementId") Long departementId,
-                                  @RequestParam(required = false) String name){
-        departementService.updateDepartement(departementId,name );
+                                  @RequestParam(required = false) String name) {
+        departementService.updateDepartement(departementId, name);
     }
-//c- get all managers of departments
+
+    //c- get all managers of departments
     @GetMapping("/managers")
-    public List<Employee> getManagers(){
+    public List<Employee> getManagers() {
         return departementService.getManagers();
     }
+
     //Departments Managed by a Specific Employee
     @GetMapping("/{employeeId}")
-    public List<Department> getDepartmentsByManager(@PathVariable("employeeId") Long employeeId){
+    public List<Department> getDepartmentsByManager(@PathVariable("employeeId") Long employeeId) {
         return departementService.getDepartmentsByManager(employeeId);
     }
+
     //Get Total Number of Employees in Each Department:
     @GetMapping("/totalEmployees")
-    public List<Object[]> getTotalEmployeesInEachDepartment(){
+    public List<Object[]> getTotalEmployeesInEachDepartment() {
         return departementService.getTotalEmployeesInEachDepartment();
     }
 }

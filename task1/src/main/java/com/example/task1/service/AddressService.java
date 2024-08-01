@@ -9,11 +9,13 @@ import java.util.List;
 
 @Service
 public class AddressService {
-    private  final AddressRepository addressRepository;
+    private final AddressRepository addressRepository;
+
     @Autowired
     public AddressService(AddressRepository addressRepository) {
         this.addressRepository = addressRepository;
     }
+
     public void addAddress(Address address) {
         addressRepository.save(address);
     }

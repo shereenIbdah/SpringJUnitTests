@@ -86,13 +86,14 @@ public class EmployeeService {
         return employees;
 
     }
-    public List<String> getEmployeeNamesByDepartment(Long department){
+
+    public List<String> getEmployeeNamesByDepartment(Long department) {
         List<String> employees = employeeRepository.findEmployeeNamesByDepartment(department);
         return employees;
     }
 
-    public List<Employee> getEmployeesByAgeRange(int minAge, int maxAge){
-        List<Employee> employees = employeeRepository.findEmployeeByAgeRange(minAge,maxAge);
+    public List<Employee> getEmployeesByAgeRange(int minAge, int maxAge) {
+        List<Employee> employees = employeeRepository.findEmployeeByAgeRange(minAge, maxAge);
         return employees;
     }
 

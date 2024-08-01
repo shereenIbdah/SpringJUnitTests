@@ -12,16 +12,20 @@ import java.util.List;
 @Service
 public class DepartmentService {
     private final DepartmentRepository departmentRepository;
+
     @Autowired
     public DepartmentService(DepartmentRepository departmentRepository) {
         this.departmentRepository = departmentRepository;
     }
+
     public void addDepartement(Department departement) {
         departmentRepository.save(departement);
     }
+
     public List<Department> getDepartements() {
         return departmentRepository.findAll();
     }
+
     public void deleteDepartement(Long departementId) {
         boolean exists = departmentRepository.existsById(departementId);
         if (!exists) {
@@ -30,24 +34,27 @@ public class DepartmentService {
         departmentRepository.deleteById(departementId);
     }
 
-    public void updateDepartement(Long departementId, String name ) {
+    public void updateDepartement(Long departementId, String name) {
         Department departement = departmentRepository.findById(departementId)
                 .orElseThrow(() -> new IllegalStateException(
                         "departement with id " + departementId + " does not exists"
                 ));
-        if (name != null) {departement.setName(name);}
+        if (name != null) {
+            departement.setName(name);
+        }
         departmentRepository.save(departement);
     }
 
-    public List<Employee> getManagers(){
+    public List<Employee> getManagers() {
         return departmentRepository.findManagers();
     }
 
-    public List<Department> getDepartmentsByManager(Long employeeId){
+    public List<Department> getDepartmentsByManager(Long employeeId) {
         return departmentRepository.findDepartmentsByManager(employeeId);
     }
+
     //Get Total Number of Employees in Each Department:
-    public List<Object[]> getTotalEmployeesInEachDepartment(){
+    public List<Object[]> getTotalEmployeesInEachDepartment() {
         return departmentRepository.getTotalEmployeesInEachDepartment();
     }
 }

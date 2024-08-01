@@ -21,11 +21,13 @@ public class Address {
 
     public Address() {
     }
-    public Address(Long id, String location, List<Employee> employees)  {
+
+    public Address(Long id, String location, List<Employee> employees) {
         this.id = id;
         this.location = location;
         this.employees = employees;
     }
+
     public Address(String location) {
         this.location = location;
     }
@@ -45,6 +47,7 @@ public class Address {
     public void setLocation(String location) {
         this.location = location;
     }
+
     public List<Employee> getEmployees() {
         return employees;
     }

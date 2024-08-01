@@ -25,7 +25,7 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
-  // the name must be as the name of the field in Departement class
+    // the name must be as the name of the field in Departement class
     @ManyToMany(mappedBy = "employees")
     @JsonIgnore
     private List<Department> departments;
@@ -38,8 +38,8 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String name, Integer age, Integer phoneNumber, String gender, Double baseSalary,  LocalDate hireDate, String role, Address address
-    , List<Department> departments ) {
+    public Employee(String name, Integer age, Integer phoneNumber, String gender, Double baseSalary, LocalDate hireDate, String role, Address address
+            , List<Department> departments) {
         this.name = name;
         this.age = age;
         this.phoneNumber = phoneNumber;
@@ -146,6 +146,7 @@ public class Employee {
     public void setDepartments(List<Department> departments) {
         this.departments = departments;
     }
+
     @Override
     public String toString() {
         return "Employee{" +
