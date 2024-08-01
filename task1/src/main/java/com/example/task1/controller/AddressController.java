@@ -30,6 +30,7 @@ public class AddressController {
     @PutMapping(path = "{addressId}")
     public void updateStudent(@PathVariable("addressId") Long studentId,
                               @RequestParam(required = true) String location) {
+        System.out.println("ssssssssssssssssssss");
         addressService.updateAddress(studentId, location);
     }
 }
