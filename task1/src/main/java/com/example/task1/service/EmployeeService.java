@@ -28,6 +28,7 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
+
     public void deleteEmployee(Long employeeId) {
         boolean exists = employeeRepository.existsById(employeeId);
         if (!exists) {
@@ -37,7 +38,6 @@ public class EmployeeService {
     }
 
 
-    //      (employeeId,name ,gender ,age,phoneNumber,baseSalary,role);
     public void updateEmployee(Long employeeId, String name, String gender, Integer age,
                                Integer phoneNumber, Double baseSalary, String role) {
         Employee employee = employeeRepository.findById(employeeId)
@@ -46,7 +46,6 @@ public class EmployeeService {
                 ));
         if (name != null) {
             employee.setName(name);
-
         }
         if (gender != null) {
             employee.setGender(gender);
@@ -77,7 +76,7 @@ public class EmployeeService {
         }
     }
 
-    public List<Employee> getEmployeeSortedByName(String name) {
+    public List<Employee> getEmployeeSortedByName() {
         List<Employee> employees = employeeRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
         return employees;
     }

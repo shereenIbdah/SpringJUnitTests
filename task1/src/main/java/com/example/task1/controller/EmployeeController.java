@@ -55,7 +55,7 @@ public class EmployeeController {
 
     @GetMapping("/sort/{sort}")
     public List<Employee> getStudentsWithSort(@PathVariable("sort") String name) {
-        return employeeService.getEmployeeSortedByName(name);
+        return employeeService.getEmployeeSortedByName();
     }
 
     //get employees by gender

@@ -2,11 +2,13 @@ package com.example.task1.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.List;
 
 @Entity
 @Table(name = "address")
+@Builder
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +29,11 @@ public class Address {
         this.location = location;
         this.employees = employees;
     }
+    public Address(Long id, String location) {
+        this.id = id;
+        this.location = location;
+    }
+
 
     public Address(String location) {
         this.location = location;
