@@ -2,12 +2,14 @@ package com.example.task1.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "employee")
+//@Builder
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +52,19 @@ public class Employee {
         this.address = address;
         this.departments = departments;
 //        this.department = department;
+    }
+
+    public Employee(Long id, String name, Integer age, String gender, Integer phoneNumber, Double baseSalary, LocalDate hireDate, String role, Address address, List<Department> departments) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.phoneNumber = phoneNumber;
+        this.baseSalary = baseSalary;
+        this.hireDate = hireDate;
+        this.role = role;
+        this.address = address;
+        this.departments = departments;
     }
 
     public Long getId() {
