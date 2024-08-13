@@ -18,8 +18,9 @@ public class AddressController {
     }
 
     @PostMapping(path = "/addAddress")
-    public void addAddress(@RequestBody Address address) {
+    public Address addAddress(@RequestBody Address address) {
         addressService.addAddress(address);
+        return address;
     }
 
     @GetMapping("/allAddress")
