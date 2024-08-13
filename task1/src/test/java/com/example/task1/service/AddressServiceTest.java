@@ -26,7 +26,7 @@ public class AddressServiceTest {
     public void testAddAddress() {
         // Arrange
         Address address = Address.builder().id(5L)
-                .location("location")
+                .location("locatio")
                 .build();
         // Act
         addressService.addAddress(address);
