@@ -3,7 +3,6 @@ package com.example.task1.service;
 import com.example.task1.model.Department;
 import com.example.task1.model.Employee;
 import com.example.task1.repository.DepartmentRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,31 +17,31 @@ public class DepartmentService {
         this.departmentRepository = departmentRepository;
     }
 
-    public void addDepartement(Department departement) {
-        departmentRepository.save(departement);
+    public void addDepartment(Department department) {
+        departmentRepository.save(department);
     }
 
-    public List<Department> getDepartements() {
+    public List<Department> getDepartments() {
         return departmentRepository.findAll();
     }
 
-    public void deleteDepartement(Long departementId) {
-        boolean exists = departmentRepository.existsById(departementId);
+    public void deleteDepartment(Long departmentId) {
+        boolean exists = departmentRepository.existsById(departmentId);
         if (!exists) {
-            throw new IllegalStateException("departement with id " + departementId + " does not exists");
+            throw new IllegalStateException("department with id " + departmentId + " does not exists");
         }
-        departmentRepository.deleteById(departementId);
+        departmentRepository.deleteById(departmentId);
     }
 
-    public void updateDepartement(Long departementId, String name) {
-        Department departement = departmentRepository.findById(departementId)
+    public void updateDepartment(Long departmentId, String name) {
+        Department department = departmentRepository.findById(departmentId)
                 .orElseThrow(() -> new IllegalStateException(
-                        "departement with id " + departementId + " does not exists"
+                        "department with id " + departmentId + " does not exists"
                 ));
         if (name != null) {
-            departement.setName(name);
+            department.setName(name);
         }
-        departmentRepository.save(departement);
+        departmentRepository.save(department);
     }
 
     public List<Employee> getManagers() {

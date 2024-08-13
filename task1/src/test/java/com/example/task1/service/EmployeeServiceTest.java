@@ -90,8 +90,13 @@ public class EmployeeServiceTest {
     @Test
     public  void testGetEmployeesWithPagination(){
         // Arrange
-        Employee employee = new Employee(2L, "ahmad", 25, "male", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
-        Employee employee1 = new Employee(3L, "shereen", 21, "female", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
+        Employee employee = new Employee(2L, "ahmad", 25, "male",
+                123456789, 5000.0, LocalDate.of(2021, 1, 1),
+                "developer", null, null);
+        Employee employee1 = new Employee(3L, "shereen",
+                21, "female", 123456789, 5000.0,
+                LocalDate.of(2021, 1, 1), "developer",
+                null, null);
         List<Employee> employees = List.of(employee, employee1);
         Page<Employee> pagedEmployees = new PageImpl<>(employees);
         when(employeeRepository.findAll(PageRequest.of(0, 2))).thenReturn(pagedEmployees);

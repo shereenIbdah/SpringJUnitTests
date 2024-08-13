@@ -33,6 +33,13 @@ public class Department {
         this.employees = employees;
     }
 
+    public Department(Long id, String name, List<Employee> employees, Employee manager) {
+        this.id = id;
+        this.name = name;
+        this.employees = employees;
+        this.manager = manager;
+    }
+
     public String getName() {
         return name;
     }
