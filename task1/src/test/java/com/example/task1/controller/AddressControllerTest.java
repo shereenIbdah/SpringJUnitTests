@@ -1,6 +1,4 @@
 package com.example.task1.controller;
-
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import com.example.task1.model.Address;
@@ -99,8 +97,58 @@ import java.util.List;
         assertThat(outputInJson).isEqualTo(expectedJson);
         assertEquals(HttpStatus.OK.value(), response.getStatus());
     }
+    @Test
+    public void testDeleteAddress() throws Exception {
+        // Given: An address ID to delete
+        Long addressId = 1L;
 
+        // When: Mock the deleteAddress method to do nothing
+        Mockito.doNothing().when(addressService).deleteAddress(addressId);
 
+        // Define the URI for the DELETE request
+        String URI = "/api/v1/address/deleteAddress/" + addressId;
+
+        // Perform the DELETE request
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .delete(URI)
+                .accept(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        MockHttpServletResponse response = result.getResponse();
+
+        // Then: Verify the response status is 200 OK (or 204 No Content)
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+        // Optionally, verify that the service method was called with the correct ID
+        Mockito.verify(addressService, Mockito.times(1)).deleteAddress(addressId);
+    }
+    @Test
+    public void testUpdateStudent() throws Exception {
+        // Given: An address ID and a new location to update
+        Long addressId = 1L;
+        String newLocation = "New Street";
+
+        // When: Mock the updateAddress method to do nothing
+        Mockito.doNothing().when(addressService).updateAddress(addressId, newLocation);
+
+        // Define the URI for the PUT request
+        String URI = "/api/v1/address/" + addressId;
+
+        // Perform the PUT request with the location as a parameter
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .put(URI)
+                .param("location", newLocation)
+                .accept(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        MockHttpServletResponse response = result.getResponse();
+
+        // Then: Verify the response status is 200 OK (or another appropriate status)
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+
+        // Optionally, verify that the service method was called with the correct parameters
+        Mockito.verify(addressService, Mockito.times(1)).updateAddress(addressId, newLocation);
+    }
 
 
     /**

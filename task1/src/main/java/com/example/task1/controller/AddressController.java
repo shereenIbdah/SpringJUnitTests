@@ -24,19 +24,11 @@ public class AddressController {
         addressService.addAddress(address);
         return address;
     }
-
-//    @GetMapping("/allAddress")
-//    public List<Address> getAddresses() {
-//        return addressService.getAddresses();
-//    }
-   @GetMapping("/getAddresses")
-   public ResponseEntity<List<Address>> getAllAddresses() {
-    List<Address> addresses = addressService.getAddresses();
-    return new ResponseEntity<>(addresses, HttpStatus.OK);
-}
-
-
-
+    @GetMapping("/getAddresses")
+    public ResponseEntity<List<Address>> getAllAddresses() {
+        List<Address> addresses = addressService.getAddresses();
+        return new ResponseEntity<>(addresses, HttpStatus.OK);
+    }
 
     @DeleteMapping(path = "/deleteAddress/{addressId}")
     public void deleteAddress(@PathVariable("addressId") Long addressId) {
@@ -46,7 +38,6 @@ public class AddressController {
     @PutMapping(path = "{addressId}")
     public void updateStudent(@PathVariable("addressId") Long studentId,
                               @RequestParam(required = true) String location) {
-        System.out.println("ssssssssssssssssssss");
         addressService.updateAddress(studentId, location);
     }
 }
