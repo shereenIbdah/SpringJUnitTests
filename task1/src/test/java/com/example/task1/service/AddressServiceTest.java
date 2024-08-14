@@ -75,7 +75,6 @@ public class AddressServiceTest {
         // Arrange
         Long addressId = 1L;
         when(addressRepository.existsById(addressId)).thenReturn(false);
-
         // Act & Assert
         assertThrows(IllegalStateException.class, () -> addressService.deleteAddress(addressId));
     }
@@ -88,7 +87,6 @@ public class AddressServiceTest {
         addressService.updateAddress(5L,"new location");
         verify(addressRepository).save(address);
         assertEquals("new location", address.getLocation());
-
     }
     @Test
     public void testUpdateAddress_ThrowsExceptionWhenAddressDoesNotExist() {

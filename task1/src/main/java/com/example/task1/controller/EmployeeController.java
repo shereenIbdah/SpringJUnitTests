@@ -1,10 +1,13 @@
 package com.example.task1.controller;
 
+import com.example.task1.model.Address;
 import com.example.task1.model.Employee;
 import com.example.task1.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,13 +23,15 @@ public class EmployeeController {
     }
 
     @PostMapping(path = "/addEmployee")
-    public void addEmployee(@RequestBody Employee employee) {
+    public Employee addEmployee(@RequestBody Employee employee) {
         employeeService.addEmployee(employee);
+        return employee;
     }
 
     @GetMapping("/allEmployee")
-    public List<Employee> getEmployees() {
-        return employeeService.getEmployees();
+    public ResponseEntity<List<Employee>> getEmployees() {
+        List<Employee> employees = employeeService.getEmployees();
+        return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/deleteEmployee/{employeeId}")
@@ -53,8 +58,8 @@ public class EmployeeController {
         return employeeService.getEmployeesWithPagination(page, pageSize);
     }
 
-    @GetMapping("/sort/{sort}")
-    public List<Employee> getStudentsWithSort(@PathVariable("sort") String name) {
+    @GetMapping("/sort")
+    public List<Employee> getEmployeesWithSort() {
         return employeeService.getEmployeeSortedByName();
     }
 
