@@ -1,11 +1,8 @@
 package com.example.task1.controller;
 
-import com.example.task1.model.Address;
 import com.example.task1.model.Employee;
 import com.example.task1.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +20,9 @@ public class EmployeeController {
     }
 
     @PostMapping(path = "/addEmployee")
-    public Employee addEmployee(@RequestBody Employee employee) {
-        employeeService.addEmployee(employee);
-        return employee;
+    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+        Employee employees= employeeService.addEmployee(employee);
+        return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
     @GetMapping("/allEmployee")
@@ -53,32 +50,39 @@ public class EmployeeController {
 
     //pagination By page number and size of the page
     @GetMapping("/employees/pagination")
-    public List<Employee> getEmployeesWithPagination(@RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<List<Employee>>  getEmployeesWithPagination(@RequestParam(defaultValue = "0") int page,
                                                      @RequestParam(defaultValue = "-1") int pageSize) {
-        return employeeService.getEmployeesWithPagination(page, pageSize);
+          List<Employee> employees = employeeService.getEmployeesWithPagination(page, pageSize);
+            return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
+
     @GetMapping("/sort")
-    public List<Employee> getEmployeesWithSort() {
-        return employeeService.getEmployeeSortedByName();
+    public ResponseEntity<List<Employee>>  getEmployeesWithSort() {
+        List<Employee> employees = employeeService.getEmployeeSortedByName();
+        return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
     //get employees by gender
     @GetMapping("/gender")
-    public List<Employee> getEmployeesByGender(@RequestParam String gender) {
-        return employeeService.getEmployessBasedOnGender(gender);
+    public ResponseEntity<List<Employee>> getEmployeesByGender(@RequestParam String gender) {
+        List<Employee> employees =  employeeService.getEmployessBasedOnGender(gender);
+        return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
     // get all names of employees who work in the specific department.
     @GetMapping("/departmentId")
-    public List<String> getEmployeeNamesByDepartment(@RequestParam Long department) {
-        return employeeService.getEmployeeNamesByDepartment(department);
+    public  ResponseEntity<List<String>> getEmployeeNamesByDepartment(@RequestParam Long department) {
+        List<String>  names =  employeeService.getEmployeeNamesByDepartment(department);
+        return  new ResponseEntity<>(names, HttpStatus.OK);
     }
 
     //Get Employees by Age Range:
     @GetMapping("/age")
-    public List<Employee> getEmployeesByAgeRange(@RequestParam int minAge, @RequestParam int maxAge) {
-        return employeeService.getEmployeesByAgeRange(minAge, maxAge);
+    public  ResponseEntity<List<Employee>> getEmployeesByAgeRange(@RequestParam int minAge, @RequestParam int maxAge) {
+        List<Employee> employees =  employeeService.getEmployeesByAgeRange(minAge, maxAge);
+        return  new ResponseEntity<>(employees, HttpStatus.OK);
+
     }
 
 }

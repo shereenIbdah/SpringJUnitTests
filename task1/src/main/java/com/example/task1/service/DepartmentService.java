@@ -17,8 +17,9 @@ public class DepartmentService {
         this.departmentRepository = departmentRepository;
     }
 
-    public void addDepartment(Department department) {
+    public Department addDepartment(Department department) {
         departmentRepository.save(department);
+        return department;
     }
 
     public List<Department> getDepartments() {
