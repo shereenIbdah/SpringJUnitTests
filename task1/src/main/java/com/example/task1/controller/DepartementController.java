@@ -18,23 +18,23 @@ public class DepartementController {
         this.departementService = departementService;
     }
 
-    @PostMapping(path = "/addDepartement")
+    @PostMapping(path = "/addDepartment")
     public void addDepartement(@RequestBody Department departement) {
         departementService.addDepartment(departement);
     }
 
-    @GetMapping("/allDepartement")
+    @GetMapping("/allDepartment")
     public List<Department> getDepartements() {
         return departementService.getDepartments();
     }
 
-    @DeleteMapping(path = "/deleteDepartement/{departementId}")
-    public void deleteDepartement(@PathVariable("departementId") Long departementId) {
+    @DeleteMapping(path = "/deleteDepartment/{departmentId}")
+    public void deleteDepartement(@PathVariable("departmentId") Long departementId) {
         departementService.deleteDepartment(departementId);
     }
 
-    @PutMapping(path = "/updateDepartement/{departementId}")
-    public void updateDepartement(@PathVariable("departementId") Long departementId,
+    @PutMapping(path = "/updateDepartment/{departmentId}")
+    public void updateDepartement(@PathVariable("departmentId") Long departementId,
                                   @RequestParam(required = false) String name) {
         departementService.updateDepartment(departementId, name);
     }

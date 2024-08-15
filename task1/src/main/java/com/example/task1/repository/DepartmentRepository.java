@@ -17,7 +17,7 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
 
     //getDepartmentsByManager
     @Query("SELECT d FROM Department d WHERE d.manager.id = ?1")
-    List<Department> findDepartmentsByManager(Long employeeId);
+    List<Department> findDepartmentsByManager(Long managerId);
     //Get Total Number of Employees in Each Department:
 
     @Query("SELECT d.name ,COUNT(e) FROM Department d JOIN d.employees e  GROUP BY d")

@@ -1,10 +1,12 @@
 package com.example.task1.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.List;
 
 @Entity
+@Builder
 @Table(name = "department")
 public class Department {
     @Id
@@ -72,5 +74,13 @@ public class Department {
         this.manager = manager;
     }
 
-
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", employees=" + employees +
+                ", manager=" + manager +
+                '}';
+    }
 }
