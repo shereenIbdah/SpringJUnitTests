@@ -32,8 +32,9 @@ public class EmployeeRepositoryTest {
         assertThat(employees).isNotNull();
         assertThat(employees.size()).isEqualTo(1);
     }
+
     @Test
-    public void testFindEmployeeByGender(){
+    public void testFindEmployeeByGender() {
         Employee employee = new Employee(2L, "ahmad", 25, "male", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
         Employee employee1 = new Employee(3L, "shereen", 21, "female", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
         List<Employee> employees = List.of(employee, employee1);
@@ -43,23 +44,25 @@ public class EmployeeRepositoryTest {
         assertThat(result.size()).isEqualTo(1);
 
     }
+
     @Test
     public void testFindEmployeeNamesByDepartment() {
         Department department1 = new Department(1L, "IT",
                 null, null);
-          Department dep =  departmentRepository.save(department1);
+        Department dep = departmentRepository.save(department1);
 
         Employee employee = new Employee(2L, "ahmad", 25, "male",
                 123456789, 5000.0,
                 LocalDate.of(2021, 1, 1), "developer",
                 null, List.of(dep));
-        Employee emp= employeeRepository.save(employee);
+        Employee emp = employeeRepository.save(employee);
         dep.setEmployees(List.of(emp));
         List<String> result = employeeRepository.findEmployeeNamesByDepartment(dep.getId());
         assertThat(result).isNotNull();
         assertThat(result.size()).isEqualTo(1);
         assertThat(result).containsExactly("ahmad");
     }
+
     @Test
     public void testFindEmployeeByAgeRange() {
         Employee employee = new Employee(2L, "ahmad", 25, "male", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);

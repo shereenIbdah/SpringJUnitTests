@@ -47,10 +47,7 @@ public class EmployeeControllerTest {
         String inputInJson = this.mapToJson(employee);
         String URI = "/api/v1/employee/addEmployee"; // Add leading slash
         when(employeeService.addEmployee(Mockito.any(Employee.class))).thenReturn(employee);
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .post(URI)
-                .accept(MediaType.APPLICATION_JSON).content(inputInJson)
-                .contentType(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post(URI).accept(MediaType.APPLICATION_JSON).content(inputInJson).contentType(MediaType.APPLICATION_JSON);
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
         MockHttpServletResponse response = result.getResponse();
 
@@ -81,9 +78,7 @@ public class EmployeeControllerTest {
         String URI = "/api/v1/employee/allEmployee";
 
         // Build the GET request
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get(URI)
-                .accept(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI).accept(MediaType.APPLICATION_JSON);
         try {
             // Perform the request
             MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -103,6 +98,7 @@ public class EmployeeControllerTest {
             fail("Test failed due to an exception: " + e.getMessage());
         }
     }
+
     @Test
     public void testDeleteEmployee() throws Exception {
         Long employeeId = 1L;
@@ -110,9 +106,7 @@ public class EmployeeControllerTest {
         Mockito.doNothing().when(employeeService).deleteEmployee(employeeId);
         String URI = "/api/v1/employee/deleteEmployee/" + employeeId;
         // Perform the DELETE request
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .delete(URI)
-                .accept(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.delete(URI).accept(MediaType.APPLICATION_JSON);
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
         MockHttpServletResponse response = result.getResponse();
@@ -136,26 +130,17 @@ public class EmployeeControllerTest {
         Double baseSalary = 6000.0;
         String role = "manager";
         // When: Mock the updateAddress method to do nothing
-        Mockito.doNothing().when(employeeService).updateEmployee(employeeId,name,gender
-        ,age,phoneNumber,baseSalary,role);
+        Mockito.doNothing().when(employeeService).updateEmployee(employeeId, name, gender, age, phoneNumber, baseSalary, role);
 
         // Perform the PUT request
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .put("/api/v1/employee/{employeeId}", employeeId)
-                .param("name", name)
-                .param("gender", gender)
-                .param("age", String.valueOf(age))
-                .param("phoneNumber", String.valueOf(phoneNumber))
-                .param("baseSalary", String.valueOf(baseSalary))
-                .param("role", role)
-                .accept(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.put("/api/v1/employee/{employeeId}", employeeId).param("name", name).param("gender", gender).param("age", String.valueOf(age)).param("phoneNumber", String.valueOf(phoneNumber)).param("baseSalary", String.valueOf(baseSalary)).param("role", role).accept(MediaType.APPLICATION_JSON);
 
         // Execute the request and verify the response
-        mockMvc.perform(requestBuilder)
-                .andExpect(status().isOk());
+        mockMvc.perform(requestBuilder).andExpect(status().isOk());
         // Verify that the service method was called with the correct parameters
         verify(employeeService).updateEmployee(employeeId, name, gender, age, phoneNumber, baseSalary, role);
     }
+
     @Test
     public void testGetEmployeesWithPagination() throws Exception {
         Employee employee = new Employee(2L, "ahmad", 25, "male", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
@@ -175,11 +160,7 @@ public class EmployeeControllerTest {
         String URI = "/api/v1/employee/employees/pagination";
 
         // Build the GET request with query parameters
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get(URI)
-                .param("page", "0")
-                .param("pageSize", "2")
-                .accept(MediaType.APPLICATION_JSON); //expects the response to be in JSON format.
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI).param("page", "0").param("pageSize", "2").accept(MediaType.APPLICATION_JSON); //expects the response to be in JSON format.
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
         MockHttpServletResponse response = result.getResponse();
 
@@ -194,6 +175,7 @@ public class EmployeeControllerTest {
         assertThat(outputInJson).isEqualTo(expectedJson);
         assertEquals(HttpStatus.OK.value(), response.getStatus());
     }
+
     @Test
     public void testGetEmployeesWithSort() throws Exception {
         Employee employee = new Employee(2L, "ahmad", 25, "male", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
@@ -209,9 +191,7 @@ public class EmployeeControllerTest {
         // Mock the service to return the list of employees
         when(employeeService.getEmployeeSortedByName()).thenReturn(employeeslist);
         String URI = "/api/v1/employee/sort";
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get(URI)
-                .accept(MediaType.APPLICATION_JSON); //expects the response to be in JSON format.
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI).accept(MediaType.APPLICATION_JSON); //expects the response to be in JSON format.
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
         MockHttpServletResponse response = result.getResponse();
@@ -227,8 +207,9 @@ public class EmployeeControllerTest {
         assertEquals(HttpStatus.OK.value(), response.getStatus());
         verify(employeeService).getEmployeeSortedByName();
     }
+
     @Test
-     public void testGetEmployeesByGender(){
+    public void testGetEmployeesByGender() {
         Employee employee = new Employee(2L, "ahmad", 25, "male", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
         List<Employee> employeeslist = List.of(employee);
         // Mock the service to return employees with the specified gender
@@ -241,10 +222,7 @@ public class EmployeeControllerTest {
         }
         String URI = "/api/v1/employee/gender";
         // Build the GET request with the gender query parameter
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get(URI)
-                .param("gender", "male")
-                .accept(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI).param("gender", "male").accept(MediaType.APPLICATION_JSON);
         try {
             // Perform the request
             MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -264,6 +242,7 @@ public class EmployeeControllerTest {
             fail("Test failed due to an exception: " + e.getMessage());
         }
     }
+
     @Test
     public void testGetEmployeeNamesByDepartment() throws Exception {
         List<String> employeeNames = List.of("John Doe", "Jane Doe");
@@ -278,9 +257,7 @@ public class EmployeeControllerTest {
         String expectedJson = objectMapper.writeValueAsString(employeeNames);
 
         // Build the GET request with the department query parameter
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get(URI)
-                .param("department", "1") // Pass department ID as a string
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI).param("department", "1") // Pass department ID as a string
                 .accept(MediaType.APPLICATION_JSON);
 
         // Perform the request
@@ -298,8 +275,9 @@ public class EmployeeControllerTest {
         assertThat(outputInJson).isEqualTo(expectedJson);
         assertEquals(HttpStatus.OK.value(), response.getStatus());
     }
+
     @Test
-    public  void  testGetEmployeesByAgeRange(){
+    public void testGetEmployeesByAgeRange() {
         Employee employee = new Employee(2L, "ahmad", 25, "male", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
         Employee employee1 = new Employee(3L, "shereen", 21, "female", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
         List<Employee> employeeslist = List.of(employee, employee1);
@@ -314,11 +292,7 @@ public class EmployeeControllerTest {
         when(employeeService.getEmployeesByAgeRange(20, 30)).thenReturn(employeeslist);
         String URI = "/api/v1/employee/age";
         // Build the GET request with the age range query parameters
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get(URI)
-                .param("minAge", "20")
-                .param("maxAge", "30")
-                .accept(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get(URI).param("minAge", "20").param("maxAge", "30").accept(MediaType.APPLICATION_JSON);
         try {
             // Perform the request
             MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -339,11 +313,6 @@ public class EmployeeControllerTest {
         }
 
     }
-
-
-
-
-
 
 
     /**

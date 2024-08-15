@@ -28,7 +28,6 @@ public class EmployeeServiceTest {
     private EmployeeService employeeService;
 
 
-
     @Test
     public void testAddEmployee() {
         Employee employee = new Employee(2L, "ahmad", 25, "male", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
@@ -78,17 +77,19 @@ public class EmployeeServiceTest {
         assertEquals("Jane Doe", existingEmployee.getName());
         assertEquals("developer", existingEmployee.getRole());
     }
+
     @Test
-    public  void testUpdateEmployeeException(){
+    public void testUpdateEmployeeException() {
         Long employeeId = 1L;
         String role = "Admin";
         // Mock the repository behavior
         when(employeeRepository.findById(employeeId)).thenReturn(java.util.Optional.empty());
         // Act & Assert
-        assertThrows(IllegalStateException.class, () -> employeeService.updateEmployee(employeeId, "shereen",null,null,null,null,role));
+        assertThrows(IllegalStateException.class, () -> employeeService.updateEmployee(employeeId, "shereen", null, null, null, null, role));
     }
+
     @Test
-    public  void testGetEmployeesWithPagination(){
+    public void testGetEmployeesWithPagination() {
         // Arrange
         Employee employee = new Employee(2L, "ahmad", 25, "male",
                 123456789, 5000.0, LocalDate.of(2021, 1, 1),
@@ -107,8 +108,9 @@ public class EmployeeServiceTest {
         assertEquals(employee, result.get(0));
         assertEquals(employee1, result.get(1));
     }
+
     @Test
-    public void TestGetEmployeeSortedByName(){
+    public void TestGetEmployeeSortedByName() {
         //Arrange
         Employee employee1 = new Employee(2L, "ahmad", 25, "male", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
         Employee employee = new Employee(3L, "shereen", 21, "female", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
@@ -120,11 +122,12 @@ public class EmployeeServiceTest {
         //Assert
         assertEquals(sortedEmployees, result);
     }
+
     @Test
-    public void TestGetEmployeesBasedOnGender(){
+    public void TestGetEmployeesBasedOnGender() {
         Employee employee1 = new Employee(2L, "muna", 25, "female", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
         Employee employee = new Employee(3L, "shereen", 21, "female", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
-        List<Employee> expectedResult = List.of(employee,employee1);
+        List<Employee> expectedResult = List.of(employee, employee1);
         when(employeeRepository.findEmployeeByGender("female")).thenReturn(expectedResult);
         //Act
         List<Employee> result = employeeService.getEmployessBasedOnGender("female");
@@ -132,22 +135,24 @@ public class EmployeeServiceTest {
         assertEquals(expectedResult, result);
         assertEquals(2, result.size());
     }
+
     @Test
-    public void TestGetEmployeesByAgeRange(){
+    public void TestGetEmployeesByAgeRange() {
         Employee employee1 = new Employee(2L, "muna", 25, "female", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
         Employee employee = new Employee(3L, "shereen", 21, "female", 123456789, 5000.0, LocalDate.of(2021, 1, 1), "developer", null, null);
         List<Employee> expectedResult = List.of(employee1);
-        when(employeeRepository.findEmployeeByAgeRange(22,30)).thenReturn(expectedResult);
+        when(employeeRepository.findEmployeeByAgeRange(22, 30)).thenReturn(expectedResult);
         //Act
-        List<Employee> result = employeeService.getEmployeesByAgeRange(22,30);
+        List<Employee> result = employeeService.getEmployeesByAgeRange(22, 30);
         //Assert
         assertEquals(expectedResult, result);
     }
+
     @Test
-    public void TestGetEmployeeNamesByDepartment(){
+    public void TestGetEmployeeNamesByDepartment() {
         String name = "muna";
         String name1 = "shereen";
-        List<String> expectedResult = List.of(name,name1);
+        List<String> expectedResult = List.of(name, name1);
         when(employeeRepository.findEmployeeNamesByDepartment(1L)).thenReturn(expectedResult);
         //Act
         List<String> result = employeeService.getEmployeeNamesByDepartment(1L);

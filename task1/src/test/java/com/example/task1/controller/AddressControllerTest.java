@@ -1,6 +1,8 @@
 package com.example.task1.controller;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+
 import com.example.task1.model.Address;
 import com.example.task1.service.AddressService;
 import org.junit.Test;
@@ -25,38 +27,39 @@ import java.util.Arrays;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-    @WebMvcTest(value= AddressController.class)
-    public class AddressControllerTest {
+@WebMvcTest(value = AddressController.class)
+public class AddressControllerTest {
 
-        @Autowired
-        private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-        @MockBean
-        private AddressService addressService;
+    @MockBean
+    private AddressService addressService;
 
-        @Test
-        public void testCreateAddress() throws Exception {
-            Address address = new Address(1L, "aka");
+    @Test
+    public void testCreateAddress() throws Exception {
+        Address address = new Address(1L, "aka");
 
-            String inputInJson = this.mapToJson(address);
+        String inputInJson = this.mapToJson(address);
 
-            String URI = "/api/v1/address/addAddress"; // Add leading slash
+        String URI = "/api/v1/address/addAddress"; // Add leading slash
 
-            Mockito.when(addressService.addAddress(Mockito.any(Address.class))).thenReturn(address);
+        Mockito.when(addressService.addAddress(Mockito.any(Address.class))).thenReturn(address);
 
-            RequestBuilder requestBuilder = MockMvcRequestBuilders
-                    .post(URI)
-                    .accept(MediaType.APPLICATION_JSON).content(inputInJson)
-                    .contentType(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post(URI)
+                .accept(MediaType.APPLICATION_JSON).content(inputInJson)
+                .contentType(MediaType.APPLICATION_JSON);
 
-            MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-            MockHttpServletResponse response = result.getResponse();
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        MockHttpServletResponse response = result.getResponse();
 
-            String outputInJson = response.getContentAsString();
+        String outputInJson = response.getContentAsString();
 
-            assertThat(outputInJson).isEqualTo(inputInJson);
-            assertEquals(HttpStatus.OK.value(), response.getStatus());
-        }
+        assertThat(outputInJson).isEqualTo(inputInJson);
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+    }
+
     @Test
     public void testGetAddresses() throws Exception {
         // Prepare the data
@@ -97,6 +100,7 @@ import java.util.List;
         assertThat(outputInJson).isEqualTo(expectedJson);
         assertEquals(HttpStatus.OK.value(), response.getStatus());
     }
+
     @Test
     public void testDeleteAddress() throws Exception {
         // Given: An address ID to delete
@@ -122,6 +126,7 @@ import java.util.List;
         // Optionally, verify that the service method was called with the correct ID
         Mockito.verify(addressService, Mockito.times(1)).deleteAddress(addressId);
     }
+
     @Test
     public void testUpdateStudent() throws Exception {
         // Given: An address ID and a new location to update
@@ -152,8 +157,8 @@ import java.util.List;
 
 
     /**
-         * Maps an Object into a JSON String. Uses a Jackson ObjectMapper.
-         */
+     * Maps an Object into a JSON String. Uses a Jackson ObjectMapper.
+     */
     public String mapToJson(Object object) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(object);
