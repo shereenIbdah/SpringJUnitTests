@@ -1,6 +1,7 @@
 package com.example.task1.controller;
 
 import com.example.task1.model.Address;
+import com.example.task1.model.Employee;
 import com.example.task1.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,9 +21,10 @@ public class AddressController {
     }
 
     @PostMapping(path = "/addAddress")
-    public Address addAddress(@RequestBody Address address) {
-        addressService.addAddress(address);
-        return address;
+    public  ResponseEntity<Address>  addAddress(@RequestBody Address address) {
+        Address addresses = addressService.addAddress(address);
+        return new ResponseEntity<>(addresses, HttpStatus.OK);
+
     }
 
     @GetMapping("/getAddresses")
