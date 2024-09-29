@@ -21,11 +21,10 @@ This project is a Spring Boot application designed to manage `Employee`, `Depart
 ## Testing
 
 ### Testing Overview
-
 - The project includes tests for each layer:
   - **Controller Tests**: Validate API endpoints and ensure correct responses using mocks.
   - **Service Tests**: Verify business logic and interactions between services using mocking.
   - **Repository Tests**: Test data access operations and database interactions.
-### Test Coverage 
+### Testing Coverage 
 ![image](https://github.com/user-attachments/assets/a954478e-b49f-4ff6-a601-c80e65539e2c)
 
